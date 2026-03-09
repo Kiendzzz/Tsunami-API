@@ -55,8 +55,7 @@ exports.handler = async (event) => {
 
   // GET - trả về danh sách job ID theo loại
   if (event.httpMethod === 'GET') {
-    const url = new URL(event.url, `http://${event.headers.host}`);
-    const type = url.searchParams.get('type');
+    const type = event.queryStringParameters?.type;
     
     if (!type || !events[type]) {
       return { statusCode: 400, headers, body: 'Missing or invalid type' };
